@@ -2,7 +2,7 @@
     <div>
         <b>{{this.data.node}}</b>
         <div>
-            Drop lol
+            CORS f'd me up
         </div>
     </div>
 </template>

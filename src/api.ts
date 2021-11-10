@@ -1,31 +1,32 @@
 import axios, { AxiosResponse } from "axios";
 import { FissureData, InvasionData, DropData } from "./data";
 
-const statURL = "https://api.warframestat.us/pc/"
-const wfcdURL = "http://drops.warframestat.us/"
+//const wfcdURL = "" 
 
 const commStat = axios.create({
-    baseURL: statURL,
+    baseURL: "https://api.warframestat.us/",
 })
 
 const responseBody = (response: AxiosResponse) => response.data;
-const parseDrops = (response: AxiosResponse) => {
-    const rewards = response.data.rewards;
-    return Array.prototype.concat(
-        rewards.A.map((x:any) => {x.rotation = "A"}),
-        rewards.C.map((x:any) => {x.rotation = "B"}),
-        rewards.C.map((x:any) => {x.rotation = "C"})
-    )
-}
-const commWfcd = axios.create({
-    baseURL: wfcdURL,
-})
+
+//RIP due to CORS, using previous instead
+// const commWfcd = axios.create({
+//     baseURL: http://drops.warframestat.us/,
+// })
+// const parseDrops = (response: AxiosResponse) => {
+//     const rewards = response.data.rewards;
+//     return Array.prototype.concat(
+//         rewards.A.map((x:any) => {x.rotation = "A"}),
+//         rewards.C.map((x:any) => {x.rotation = "B"}),
+//         rewards.C.map((x:any) => {x.rotation = "C"})
+//     )
+// }
 
 const commRewards = async (node: string) : Promise<DropData[]> => 
 {
     const tokens = node.replace(/[())]/g, '').split(" ");
-    const response = await commWfcd.get("data/missionRewards/" + tokens[1] + "/" + tokens[0] + ".json");
-    return parseDrops(response);
+    const response = await commStat.get("drops/search/"+ tokens[0]);
+    return responseBody(response);
 }
 
 // const commRelics = (planet:string, node: string) =>
@@ -34,7 +35,7 @@ const commRewards = async (node: string) : Promise<DropData[]> =>
 // })
 
 export const Comm  = {
-    getFissures: (): Promise<FissureData[]> => commStat.get("fissures").then(responseBody),
-    getInvasions: (): Promise<InvasionData[]> => commStat.get("endpoints").then(responseBody),
+    getFissures: (): Promise<FissureData[]> => commStat.get("pc/fissures").then(responseBody),
+    getInvasions: (): Promise<InvasionData[]> => commStat.get("pc/endpoints").then(responseBody),
     getRewards: (node: string) : Promise<DropData[]> => commRewards(node),
 }

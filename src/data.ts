@@ -16,9 +16,8 @@ type InvasionData = {
 }
 
 type DropData = {
-    rotation: string,
-    _id: string,
-    itemName: string,
+    place: string,
+    name: string,
     rarity: string,
     chance: number,
 }
