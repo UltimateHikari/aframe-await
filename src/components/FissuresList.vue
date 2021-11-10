@@ -10,41 +10,39 @@
     </div>
 </template>
 
-<script>
-import axios from "axios";
-import stat from "@/api.ts"
+<script lang="ts">
+
+import { defineComponent } from 'vue'
+import { Comm } from "@/api.ts"
+import { FissureData, InvasionData } from "@/data.ts"
 import Fissure from "./Fissure.vue"
 
-const comm = (endpoint) => axios.create({
-   baseURL: stat + "/" + endpoint,
-})
-
-export default{
+export default defineComponent({
     name: "FissuresList",
     components:{
         Fissure
     },
     data(){
         return {
-            fissures:  [],
-            invasions: [],
+            fissures:  [] as FissureData[],
+            invasions: [] as InvasionData[],
         };
     },
     created() {
-        comm("fissures").get()
-        .then(result => this.bindFissures(result));
-        comm("invasions").get()
-        .then(result => this.bindInvasions(result));
+        Comm.getFissures()
+        .then((result) => this.bindFissures(result));
+        Comm.getInvasions()
+        .then((result) => this.bindInvasions(result));
     },
     methods:{
-        bindFissures(response){
+        bindFissures(response: FissureData[]){
             console.log(response);
-            this.fissures = response.data;
+            this.fissures = response;
         },
-        bindInvasions(response){
+        bindInvasions(response: InvasionData[]){
             console.log(response);
-            this.invasions = response.data;
+            this.invasions = response;
         },
     }
-}
+})
 </script>
