@@ -1,8 +1,8 @@
 <template>
     <div>
         <b>{{this.data.node}}</b>
-        <div>
-            CORS f'd me up
+        <div v-for="drop in drops" :key="drop.name">
+            <Drop :data="drop" />
         </div>
     </div>
 </template>
@@ -12,9 +12,13 @@
 import { defineComponent } from 'vue'
 import { FissureData, DropData } from "@/data.ts"
 import { Comm } from "@/api.ts"
+import Drop from "./Drop.vue"
 
 export default defineComponent({
     name: 'Fissure',
+    components:{
+        Drop
+    },
     props:{
         data: Object as () => FissureData,
     },

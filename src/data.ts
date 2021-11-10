@@ -17,7 +17,7 @@ type InvasionData = {
 
 type DropData = {
     place: string,
-    name: string,
+    item: string,
     rarity: string,
     chance: number,
 }
