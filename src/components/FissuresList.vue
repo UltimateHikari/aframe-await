@@ -1,11 +1,19 @@
 <template>
     <div class="FissureList">
+        <div 
+        class="Fissure"
+        v-for="fissure in fissures"
+        :key="fissure.id"
+        >
+            <Fissure :data="fissure" />
+        </div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import stat from "@/api.js"
+import stat from "@/api.ts"
+import Fissure from "./Fissure.vue"
 
 const comm = (endpoint) => axios.create({
    baseURL: stat + "/" + endpoint,
@@ -13,6 +21,9 @@ const comm = (endpoint) => axios.create({
 
 export default{
     name: "FissuresList",
+    components:{
+        Fissure
+    },
     data(){
         return {
             fissures:  [],
