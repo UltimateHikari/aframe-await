@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import FissureList from './components/FissureList.vue'
+import FissureList from './components/FissuresList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    FissureList
   }
 }
 </script>
