@@ -22,4 +22,9 @@ type DropData = {
     chance: number,
 }
 
-export { FissureData, InvasionData, DropData};
+type PlatinumData = {
+    avg_price: number,
+    median: number,
+}
+
+export { FissureData, InvasionData, DropData, PlatinumData};

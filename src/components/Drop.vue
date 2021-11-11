@@ -6,8 +6,9 @@
 
 <script lang="ts">
 
+import { Comm } from "@/api.ts"
 import { defineComponent } from 'vue'
-import { DropData } from "@/data.ts"
+import { DropData, PlatinumData } from "@/data.ts"
 
 export default defineComponent({
     name: 'Drop',
@@ -18,18 +19,26 @@ export default defineComponent({
         return {
             isRare: true,
             isUncommon: false,
+            plat: {} as PlatinumData,
         }
     },
     created(){
         this.isRare = ((this.data?.rarity ?? " ")  == "Rare");
         this.isUncommon = ((this.data?.rarity ?? " ") == "Uncommon");
+        Comm.getPlatinumData(this.data?.item ?? "")
+        .then((result) => this.bindPlat(result));
     },
     methods:{
         getAlias(){
             return (this.data?.item
             .replace("Relic", "").replace("adiant", "") ?? " ") + 
-            (this.data?.chance + "%" ?? " ");
+            (this.data?.chance + "% " ?? " ");/* +
+            (this.plat?.median + "p" ?? " ");*/
         },
+        bindPlat(plat: PlatinumData){
+            console.log(plat);
+            this.plat = plat;
+        }
     }
 })
 
