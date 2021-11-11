@@ -1,7 +1,6 @@
 <template>
-    <div class="fissurelist">
+    <div class="container">
         <div 
-        class="Fissure"
         v-for="fissure in fissures"
         :key="fissure.id"
         >
@@ -37,7 +36,7 @@ export default defineComponent({
     methods:{
         bindFissures(response: FissureData[]){
             console.log(response);
-            this.fissures = response;
+            this.fissures = response.sort((a: FissureData, b: FissureData) => a.tierNum - b.tierNum);
         },
         bindInvasions(response: InvasionData[]){
             console.log(response);
@@ -47,7 +46,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped src="./Drop.scss" lang="scss">
 .fissurelist{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
