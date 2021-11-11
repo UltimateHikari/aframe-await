@@ -1,10 +1,15 @@
-<template>
+<template >
     <div>
-        <b>{{this.data.node}}</b>
-        <div class="droplist">
+        <p>{{this.data.node}}</p>
+        <p>{{this.data.missionType}}</p>
+        <p>{{this.data.eta}}</p>
+        <div class="droplist" v-if="drops.length > 0">
             <div v-for="drop in drops" :key="drop.name">
                 <Drop :data="drop" />
             </div>
+        </div>
+        <div class="droplist" v-else>
+            No Relic drops here
         </div>
     </div>
 </template>

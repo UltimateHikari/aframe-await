@@ -39,10 +39,12 @@ export default defineComponent({
 
 .uncommon{
     color: green;
+    font-weight: bold;
 }
 
 .rare{
     color: blue;
+    font-weight: bold;
 }
 
 </style>
