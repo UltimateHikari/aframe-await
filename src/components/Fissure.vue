@@ -4,8 +4,9 @@
             <div class="content">
                 <h4 class="blue">Tier: {{this.data.tier}}</h4>
                 <h4 class="blue">Type: {{this.data.missionType}}</h4>
-                <p class="blue">Time remains <br>(since request): {{this.data.eta}}</p>
+                <p class="blue">Time remains: {{this.data.eta}}</p>
                 <div class="droplist" v-if="drops.length > 0">
+                    <p class="blue">{{this.crop}} best possible relic drops</p>
                     <div v-for="drop in drops" :key="drop.name">
                         <Drop :data="drop" />
                     </div>
@@ -38,7 +39,8 @@ export default defineComponent({
     },
     data(){
         return {
-            drops: [] as DropData[]
+            drops: [] as DropData[],
+            crop: 7 as Number,
         }
     },
     created(){
@@ -48,7 +50,7 @@ export default defineComponent({
     methods:{
         bindDrops(response: DropData[]){
             console.log(response);
-            this.drops = response.filter(drop => drop.item.includes("Relic"));
+            this.drops = response.filter(drop => drop.item.includes("Relic")).slice(0,7);
         }
     }
 })
