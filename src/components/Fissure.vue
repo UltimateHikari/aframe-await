@@ -1,8 +1,10 @@
 <template>
     <div>
         <b>{{this.data.node}}</b>
-        <div v-for="drop in drops" :key="drop.name">
-            <Drop :data="drop" />
+        <div class="droplist">
+            <div v-for="drop in drops" :key="drop.name">
+                <Drop :data="drop" />
+            </div>
         </div>
     </div>
 </template>
@@ -39,3 +41,17 @@ export default defineComponent({
     }
 })
 </script>
+
+<style>
+.droplist {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.droplist > * {
+    flex: 1
+}
+
+</style>
