@@ -1,5 +1,5 @@
 <template>
-    <div class="FissureList">
+    <div class="fissurelist">
         <div 
         class="Fissure"
         v-for="fissure in fissures"
@@ -46,3 +46,11 @@ export default defineComponent({
     }
 })
 </script>
+
+<style>
+.fissurelist{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+    grid-gap: 10px
+}
+</style>

@@ -34,7 +34,7 @@ export default defineComponent({
     methods:{
         bindDrops(response: DropData[]){
             console.log(response);
-            this.drops = response;
+            this.drops = response.filter(drop => drop.item.includes("Relic"));
         }
     }
 })

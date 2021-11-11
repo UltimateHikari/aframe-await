@@ -1,6 +1,6 @@
 <template>
     <b>
-    {{this.data.item + this.data.rarity}}
+    {{this.data.item + " " + this.data.rarity}}
     </b>
 </template>
 
